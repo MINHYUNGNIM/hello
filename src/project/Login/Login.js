@@ -4,61 +4,55 @@ import '../CSS/Style_Login.css';
 import logo from '../images/logo.png';
 
 function Login() {
+  window.localStorage.setItem("isLogin", "FALSE");
+
   // 키보드 입력
   const [inputId, setInputId] = useState("");
   const [inputPassword, setInputPassoword] = useState("");
 
-  // 오류 메시지
-  const [idMessage, setIdMessage] = useState("");
-  const [pwMessage, setPwMessage] = useState("");
-
-  // 유효성 검사
-  const [isId, setIsId] = useState("");
-  const [isPw, setIsPw] = useState("");
-
-  const onChangId = (e) => {
-    setInputId(e.target.value);
-    if (e.target.value.length < 5 || e.target.value.length > 12) {
-      setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
-      setIsId(false);    
-    } else {
-      setIdMessage("올바른 형식 입니다.");
-      setIsId(true);
-    }
+  const onChangeId = (e) => {
+    // 조혜경 : e.target.value를 변수에 담아 사용하기
+    let tmpID = e.target.value;
+    setInputId(tmpID);
+    
+    // console.log("현재 tmpID :  " + tmpID);
+    // console.log("현재 id : " + inputId);
   }
 
   const onChangePw = (e) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-    const passwordCurrent = e.target.value ;
-    setInputPassoword(passwordCurrent);
-    if (!passwordRegex.test(passwordCurrent)) {
-      setPwMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
-      setIsPw(false)
-    } else {
-      setPwMessage('안전한 비밀번호에요 : )')
-      setIsPw(true);
-    }        
+    // 조혜경 : 비밀번호 정규식
+    const passwordRegex = /^(?=.*[a-z])(?=.*[0-9]).{8,25}$/
+    
+    // 조혜경 : e.target.value를 변수에 담아 사용하기
+    let tmpPassword = e.target.value;
+    setInputPassoword(tmpPassword);
+    
+    // console.log("현재 tmpPassword : " + tmpPassword);
+    // console.log("현재 Password : " + inputPassword);
   }
 
   const onClickLogin = async(e) => {
     e.preventDefault();
-    console.log("로그인버튼 눌렀음");
+    console.log("입력한 ID : " + inputId);
+    console.log("입력한 Password : " + inputPassword);
+    console.log("로그인(SIGN IN) 버튼 눌렀어요.");
 
     try {
-      // 로그인을 위한 axios 호출
       const res = await TeamAPI.userLogin(inputId, inputPassword);
+      // 로그인을 위한 axios 호출
       console.log("호출 TRY: " + res.data.result);
-      
+
       if(res.data.result === "OK") {
         window.localStorage.setItem("userId", inputId);
         window.localStorage.setItem("userPw", inputPassword);
-        window.location.replace("/Home");
+        window.localStorage.setItem("isLogin", "TRUE");
+        window.location.replace("/home");
       } else {
-        alert("아이디/비밀번호를 확인하시오!");
+        alert("아이디 또는 비밀번호를 확인하세요!");
       }
     } catch (e) {
-      alert("1111나는 팝업 창이다." + inputId + inputPassword);
-      console.log("로그인 에러..");
+      alert("오류 발생!! 아이디(" + inputId +")랑 비밀번호("+ inputPassword +")는 일단 넘어와요.");
+      console.log("로그인 에러!! 왜 또 안 될까..?");
     }
   }
 
@@ -80,27 +74,24 @@ function Login() {
 
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded">mail</span>
-              <input type="text" placeholder="Enter Email" value={inputId} onChange={onChangId} required />
-            </div>
-            <div className="hint">
-              {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
+              {/* 조혜경 : placeholder 값 변경, onChangeId 오타 수정 */}
+              <input type="text" placeholder="Enter ID" value={inputId} onChange={onChangeId} required />
             </div>
 
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded">lock</span>
-              <input type="password" placeholder="Enter Password" value ={inputPassword} onChange={onChangePw} required />
-            </div>
-            <div className="hint">
-              {inputPassword.length > 0 && (
-              <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>)}
+              <input type="password" placeholder="Enter Password" value ={inputPassword} onChange={onChangePw} />
             </div>
 
             <div className="Form-item-other">
-              <div className="Checkbox">
+              
+              {/* 조혜경 : 삭제함 */}
+              {/* -------- for -> htmlFor  카멜표기법으로 해야함!!!! */}
+          {/* <div className="Checkbox">
                 <input type="checkbox" id="rememberMeCheckbox" />
-                {/* -------- for -> htmlFor  카멜표기법으로 해야함!!!! */}
                 <label htmlFor="rememberMeCheckbox">Remember me</label>
-              </div>
+              </div>  */}
+               
               <a href="/">I forgot my password</a>
             </div>
 
