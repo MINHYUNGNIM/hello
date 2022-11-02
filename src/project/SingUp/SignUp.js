@@ -117,14 +117,16 @@ function SignUp() {
       alert("먼저, 아이디를 확인하세요.");
     } else {
       setIsId_check(true);
+      
       // 가입 여부 우선 확인
       const memberCheck = await TeamAPI.memberRegCheck(id);
+ 
       console.log("memberCheck.data.result : " + memberCheck.data.result);
       if(memberCheck.data.result === true) {
         setId("");
-        console.log("이미 가입되어 있는 ID 입니다.");
+        alert("이미 가입되어 있는 ID 입니다.")
       } else {
-        console.log("사용 가능한 ID 입니다.");
+        alert("사용 가능한 아이디입니다!");
       }
     }
   }
