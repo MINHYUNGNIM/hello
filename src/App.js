@@ -6,7 +6,7 @@ import MyPage from './project/pages/MyPage';
 import MemberInfo from './project/pages/MemberInfo';
 import MemberDrop from './project/pages/MemberDrop';
 import SignUp from './project/SingUp/SignUp';
-import Pg1 from './project/pages/pg1';
+import Pg1 from './project/pages/FreeTest/pg1';
 
 
 function App() {
