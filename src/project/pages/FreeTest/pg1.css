@@ -7,46 +7,46 @@
     position: fixed;
     bottom : 750px;
     right : 0px;
-
-}
-.navVar .a{
+  
+  }
+  .navVar .a{
     margin: 0 auto;
     color:aliceblue;
     margin-top: 5px;
     font-weight: 700;
     text-decoration: none;
-}
-
-.a :visited{
+  }
+  
+  .a :visited{
     color:white;
     font-weight: 700;
     text-decoration: none;
-}
-.where{
+  }
+  .where{
     font-size: 50px;
-}
-.quiz{
+  }
+  .quiz{
     font-size: 25px;
     font-weight: 900;
-}
-.o{
+  }
+  .o{
     font-size: 60px;
     position: relative;
     color: greenyellow;
     left: 50px;
     top: 50px;
-}
-.x{
+  }
+  .x{
     font-size: 60px;
     position: relative;
     left:210px;
     color: red;
     top: 50px;
-
-}
-
-.result{
+  
+  }
+  
+  .result{
     font-size: 50px;
     color: orangered;
     font-weight: 900;
-}
+  }
