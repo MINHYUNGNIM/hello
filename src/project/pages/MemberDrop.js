@@ -19,7 +19,7 @@ const MemberDrop = () => {
   };
 
   const onTest = async() => {
-    var message = "정말로 탈퇴하시겠습니까??";
+    const message = "정말로 탈퇴하시겠습니까??";
     let result = window.confirm(message);
     console.log(result);
 

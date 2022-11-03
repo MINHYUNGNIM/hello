@@ -1,12 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import TeamAPI from '../api/TeamAPI';
 import hangjungdong from "../hangjungdong";
 
 // 정규식 조건
 
-// 조혜경 : 이름 정규식 추가
-const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
+// 조혜경 : 이름 정규식 추가s
+const regexName = /^[ㄱ-ㅎ가-힣]{2,10}$/;
 
 const regexId = /^\w{5,20}$/;
 // const regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
@@ -55,7 +55,7 @@ function SignUp() {
   // 조혜경 : 보여줄 문구 상태
   const [showReqName, setShowReqName] = useState(false);
   const [showReqId, setShowReqId] = useState(false);
-  const [showAcceptId, setShowAcceptId] = useState(false);
+  const [showAcceptId] = useState(false);
   const [showGuideId, setShowGuideId] = useState(false);
   const [showGuidePassword, setShowGuidePassword] = useState(false);
   const [showAcceptPassword, setShowAcceptPassword] = useState(false);
@@ -124,7 +124,7 @@ function SignUp() {
       console.log("memberCheck.data.result : " + memberCheck.data.result);
       if(memberCheck.data.result === true) {
         setId("");
-        alert("이미 가입되어 있는 ID 입니다.")
+        alert("이미 가입되어 있는 ID 입니다.");
       } else {
         alert("사용 가능한 아이디입니다!");
       }
@@ -148,7 +148,7 @@ function SignUp() {
       setShowGuidePassword(true); // 임시 정규식 : 8~20자
     }
 
-    if (password_check == '') console.log(password_check);
+    if (password_check === '') console.log(password_check);
     else if(password_check !== '' && (temp_password !== '' && temp_password === password_check)) {
       setIsPassword_check(true);
       setShowAcceptPasswordCheck(true); // 비밀번호가 일치합니다.
